@@ -1,0 +1,15 @@
+.mapillary-viewer {
+  width: 1200px;
+  height: 800px;
+  background: #000;
+}
+
+.map-view {
+  height: 100vh;
+  width: 100%;
+
+  .map-container {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -54,8 +54,8 @@ const MapView: React.FC<MapPickerProps> = ({ selectedPos, isConfirm, onSelect })
   }
 
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
-      <MapContainer center={[41, 29]} zoom={10} style={{ height: '100%', width: '100%' }}>
+    <div className="map-view">
+      <MapContainer center={[10, 29]} zoom={2} className="map-container">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

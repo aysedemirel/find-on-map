@@ -6,16 +6,14 @@ import { getDistanceInMeters } from './helpers/distance';
 import { getRandomImageInBbox } from './helpers/mapillaryApi';
 import { getRandomBbox } from './helpers/randomBox';
 import type { MapillaryImage } from './types/MapillaryImage';
-import './App.css';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
 
 function App() {
-  console.log('ID: ', ID);
   const [lat, setLat] = useState('');
   const [lon, setLon] = useState('');
-  const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [selectedPos, setSelectedPos] = useState<[number, number] | null>(null);
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [imageId, setImageId] = useState<string | null>(null);
 
   useEffect(() => {
