@@ -25,7 +25,6 @@ const MiniMap: React.FC<MiniMapProps> = ({ selectedPos, isConfirm, onSelect }) =
           {expanded ? <MinusCircleOutlined size={16} /> : <PlusCircleOutlined size={16} />}
         </button>
       </div>
-      <p className="direction-txt">Mark your guess on the map</p>
     </div>
   );
 };

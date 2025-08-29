@@ -27,9 +27,7 @@ const MapillaryViewer: React.FC<Props> = ({ imageId, token }) => {
     };
   }, [imageId, token]);
 
-  return (
-    <div ref={containerRef} style={{ width: '1700px', height: '800px', background: '#000' }} />
-  );
+  return <div ref={containerRef} style={{ width: '100vw', height: '100vh', background: '#000' }} />;
 };
 
 export default MapillaryViewer;

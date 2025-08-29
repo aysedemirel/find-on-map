@@ -8,14 +8,8 @@ interface CoordinateInputProps {
 const CoordinateInput: React.FC<CoordinateInputProps> = ({ coords, onConfirm }) => {
   return (
     <div className="coordinate-container">
-      <input
-        type="text"
-        value={coords ? `${coords[0]}, ${coords[1]}` : ''}
-        readOnly
-        className="coordinate-input"
-      />
-      <button onClick={onConfirm} className="finish-btn">
-        OK
+      <button onClick={onConfirm} className={coords === null ? 'description-txt' : 'finish-btn'}>
+        {coords === null ? 'Mark your guess on the map' : 'GUESS'}
       </button>
     </div>
   );

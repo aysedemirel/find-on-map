@@ -16,7 +16,7 @@
 
 .mini-map-view {
   position: absolute;
-  bottom: 40px;
+  bottom: 60px;
   left: 20px;
   transition: all 0.3s ease;
   border: 2px solid white;
@@ -40,18 +40,5 @@
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
-  }
-
-  .direction-txt {
-    margin-top: 8px;
-    font-size: 10px;
-    color: rgb(85, 85, 85);
-    position: absolute;
-    bottom: 0px;
-    z-index: 1000;
-    background-color: darkgrey;
-    border-radius: 5px;
-    padding: 0 10px;
-    left: 5px;
   }
 }
