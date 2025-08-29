@@ -1,7 +1,4 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -22,6 +19,14 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mapillary-canvas {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .coordinate-container {
@@ -52,10 +57,25 @@ body {
   }
 }
 
-.mapillary-canvas {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+.header-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.4);
+
+  .header-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+
+  .header-name {
+    font-size: 16px;
+    font-weight: 500;
+  }
 }

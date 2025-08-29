@@ -6,6 +6,7 @@ import { getDistanceInMeters } from './helpers/distance';
 import { getRandomImageInBbox } from './helpers/mapillaryApi';
 import { getRandomBbox } from './helpers/randomBox';
 import type { MapillaryImage } from './types/MapillaryImage';
+import Header from './components/Header';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
 
@@ -46,6 +47,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <MapillaryViewer imageId={imageId ?? ''} token={ID} />
       <MapView
         isConfirm={isConfirm}
