@@ -8,6 +8,7 @@ import type { MapillaryImage } from './types/MapillaryImage';
 import Header from './components/Header';
 import MiniMap from './components/MiniMap';
 import GuessModal from './components/GuessModal';
+import LoadingView from './components/LoadingView';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
 
@@ -37,7 +38,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReload]);
 
-  if (!imageId) return <p>Loading...</p>;
+  if (!imageId) return <LoadingView />;
 
   const handleConfirm = () => {
     if (!selectedPos) return;
