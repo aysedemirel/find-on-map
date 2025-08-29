@@ -12,7 +12,7 @@ import LoadingView from './components/LoadingView';
 import CountdownTimer from './components/CountdownTimer';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
-const RETRY_MAX = 50;
+const RETRY_MAX = 10;
 
 function App() {
   const [lat, setLat] = useState('');
