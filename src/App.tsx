@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import CoordinateInput from './components/CoordinateInput';
 import MapillaryViewer from './components/MapillaryViewer';
-import MapView from './components/MapView';
 import { getDistanceInMeters } from './helpers/distance';
 import { getRandomImageInBbox } from './helpers/mapillaryApi';
 import { getRandomBbox } from './helpers/randomBox';
 import type { MapillaryImage } from './types/MapillaryImage';
 import Header from './components/Header';
+import MiniMap from './components/MiniMap';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
 
@@ -31,6 +31,7 @@ function App() {
     }
 
     if (!imageId) load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!imageId) return <p>Loading...</p>;
@@ -49,7 +50,7 @@ function App() {
     <>
       <Header />
       <MapillaryViewer imageId={imageId ?? ''} token={ID} />
-      <MapView
+      <MiniMap
         isConfirm={isConfirm}
         selectedPos={lat && lon ? [parseFloat(lat), parseFloat(lon)] : null}
         onSelect={setSelectedPos}

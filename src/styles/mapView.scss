@@ -13,3 +13,45 @@
     width: 100%;
   }
 }
+
+.mini-map-view {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+
+  .mini-map-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .direction-txt {
+    margin-top: 8px;
+    font-size: 10px;
+    color: rgb(85, 85, 85);
+    position: absolute;
+    bottom: 0px;
+    z-index: 1000;
+    background-color: darkgrey;
+    border-radius: 5px;
+    padding: 0 10px;
+    left: 5px;
+  }
+}
