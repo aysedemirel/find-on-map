@@ -9,9 +9,10 @@ import Header from './components/Header';
 import MiniMap from './components/MiniMap';
 import GuessModal from './components/GuessModal';
 import LoadingView from './components/LoadingView';
+import CountdownTimer from './components/CountdownTimer';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
-const RETRY_MAX = 5;
+const RETRY_MAX = 50;
 
 function App() {
   const [lat, setLat] = useState('');
@@ -21,8 +22,13 @@ function App() {
   const [imageId, setImageId] = useState<string | null>(null);
   const [distance, setDistance] = useState<number | null>(null);
   const [isReload, setIsReload] = useState<boolean>(false);
+  const [gameId, setGameId] = useState<number | null>(null);
 
   useEffect(() => {
+    const startGame = () => {
+      setGameId(Date.now());
+    };
+
     async function load(retry = 0) {
       try {
         const randomBbox = getRandomBbox();
@@ -39,6 +45,7 @@ function App() {
         setImageId(img.id);
         setLat(img.geometry.coordinates[1].toString());
         setLon(img.geometry.coordinates[0].toString());
+        startGame();
       } catch (err) {
         console.error(err);
       }
@@ -68,6 +75,10 @@ function App() {
     setIsReload((prev) => !prev);
   };
 
+  const handleTime = () => {
+    setIsConfirm(true);
+  };
+
   return (
     <>
       <Header />
@@ -78,6 +89,7 @@ function App() {
         onSelect={setSelectedPos}
       />
       <CoordinateInput coords={selectedPos} onConfirm={handleConfirm} />
+      {gameId && <CountdownTimer duration={2 * 60 * 1000} onTimeUp={handleTime} />}
       {isConfirm && (
         <GuessModal
           distance={distance ?? 0}
