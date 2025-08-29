@@ -6,11 +6,19 @@ import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from '
 interface MapPickerProps {
   onSelect: (coords: [number, number]) => void;
   selectedPos: [number, number] | null;
+  firstPosition?: [number, number];
   isConfirm: boolean;
+  style?: React.CSSProperties;
 }
 
-const MapView: React.FC<MapPickerProps> = ({ selectedPos, isConfirm, onSelect }) => {
-  const [firstPos, setFirstPos] = useState<[number, number] | null>(null);
+const MapView: React.FC<MapPickerProps> = ({
+  selectedPos,
+  firstPosition,
+  isConfirm,
+  style,
+  onSelect
+}) => {
+  const [firstPos, setFirstPos] = useState<[number, number] | null>(firstPosition ?? null);
 
   function LocationMarker() {
     useMapEvents({
@@ -54,8 +62,8 @@ const MapView: React.FC<MapPickerProps> = ({ selectedPos, isConfirm, onSelect })
   }
 
   return (
-    <div className="map-view">
-      <MapContainer center={[10, 29]} zoom={2} className="map-container">
+    <div className="map-view" style={style}>
+      <MapContainer center={[0, 29]} zoom={2} className="map-container" style={style}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

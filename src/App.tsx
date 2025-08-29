@@ -7,6 +7,7 @@ import { getRandomBbox } from './helpers/randomBox';
 import type { MapillaryImage } from './types/MapillaryImage';
 import Header from './components/Header';
 import MiniMap from './components/MiniMap';
+import GuessModal from './components/GuessModal';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
 
@@ -16,6 +17,8 @@ function App() {
   const [selectedPos, setSelectedPos] = useState<[number, number] | null>(null);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [imageId, setImageId] = useState<string | null>(null);
+  const [distance, setDistance] = useState<number | null>(null);
+  const [isReload, setIsReload] = useState<boolean>(false);
 
   useEffect(() => {
     async function load() {
@@ -32,18 +35,26 @@ function App() {
 
     if (!imageId) load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isReload]);
 
   if (!imageId) return <p>Loading...</p>;
 
   const handleConfirm = () => {
     if (!selectedPos) return;
-    setIsConfirm(true);
-    const distance =
+    const distanceKm =
       getDistanceInMeters(Number(lat), Number(lon), selectedPos[0], selectedPos[1]) / 1000;
-    if (distance) {
-      alert(`Distance between two coordinate: ${distance.toFixed(2)} km`);
-    }
+    setDistance(distanceKm);
+    setIsConfirm(true);
+  };
+
+  const handleReplay = () => {
+    setIsConfirm(false);
+    setDistance(null);
+    setSelectedPos(null);
+    setLat('');
+    setLon('');
+    setImageId(null);
+    setIsReload((prev) => !prev);
   };
 
   return (
@@ -56,6 +67,14 @@ function App() {
         onSelect={setSelectedPos}
       />
       <CoordinateInput coords={selectedPos} onConfirm={handleConfirm} />
+      {isConfirm && (
+        <GuessModal
+          distance={distance ?? 0}
+          handleReplay={handleReplay}
+          selectPos={selectedPos ?? [0, 0]}
+          firstPosition={[Number(lat), Number(lon)]}
+        />
+      )}
     </>
   );
 }
