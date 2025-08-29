@@ -11,6 +11,7 @@ import GuessModal from './components/GuessModal';
 import LoadingView from './components/LoadingView';
 
 const ID = import.meta.env.VITE_MAPILLARY_TOKEN;
+const RETRY_MAX = 5;
 
 function App() {
   const [lat, setLat] = useState('');
@@ -22,10 +23,19 @@ function App() {
   const [isReload, setIsReload] = useState<boolean>(false);
 
   useEffect(() => {
-    async function load() {
+    async function load(retry = 0) {
       try {
         const randomBbox = getRandomBbox();
-        const img: MapillaryImage = await getRandomImageInBbox(randomBbox, ID);
+        const img: MapillaryImage | null = await getRandomImageInBbox(randomBbox, ID);
+
+        if (!img && retry < RETRY_MAX) {
+          return load(retry + 1);
+        }
+
+        if (!img) {
+          throw new Error('No image found after multiple retries.');
+        }
+
         setImageId(img.id);
         setLat(img.geometry.coordinates[1].toString());
         setLon(img.geometry.coordinates[0].toString());
